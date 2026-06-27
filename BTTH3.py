@@ -32,7 +32,7 @@ books = [
         "title": "Cyber Security",
         "author": "Hoàng Văn Sơn",
         "category": "An Toàn Thông Tin",
-        "year": 2024,
+        "year": 2026,
         "is_available": False
     },
     {
@@ -68,4 +68,17 @@ def categories_book():
 
     return {
         "categories": new_category
+    }
+
+
+@app.get("/books/latest")
+def new_year_book():
+    new_year = max(books, key=lambda book: book["year"], default=None)
+    if new_year:
+        return {
+            "message": "Cuốn sách mới nhất",
+            "data": new_year
+        }
+    return {
+        "message": "No books available"
     }
